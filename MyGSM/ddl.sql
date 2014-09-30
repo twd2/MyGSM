@@ -1,0 +1,39 @@
+CREATE TABLE IF NOT EXISTS [Contacts] (
+  [ID] INTEGER NOT NULL ON CONFLICT FAIL PRIMARY KEY AUTOINCREMENT, 
+  [Name] TEXT, 
+  [Number] TEXT, 
+  [Remark] TEXT);
+
+
+CREATE TABLE IF NOT EXISTS [ReadySend] (
+  [ID] INTEGER NOT NULL ON CONFLICT FAIL PRIMARY KEY AUTOINCREMENT, 
+  [Time] DATETIME, 
+  [RemoteAddress] TEXT, 
+  [RemoteAddressType] CHAR, 
+  [Message] TEXT);
+
+
+CREATE TABLE IF NOT EXISTS [Received] (
+  [ID] INTEGER NOT NULL ON CONFLICT FAIL PRIMARY KEY AUTOINCREMENT, 
+  [Time] DATETIME, 
+  [RemoteAddress] TEXT, 
+  [RemoteAddressType] CHAR, 
+  [Message] TEXT);
+
+CREATE INDEX IF NOT EXISTS [timedesc] ON [Received] ([Time] DESC);
+
+
+CREATE TABLE IF NOT EXISTS [Sent] (
+  [ID] INTEGER NOT NULL ON CONFLICT FAIL PRIMARY KEY AUTOINCREMENT, 
+  [Time] DATETIME, 
+  [RemoteAddress] TEXT, 
+  [RemoteAddressType] CHAR, 
+  [Message] TEXT, 
+  [Succeeded] BOOLEAN);
+
+
+CREATE TABLE IF NOT EXISTS [Settings] (
+  [Key] VARCHAR NOT NULL ON CONFLICT FAIL, 
+  [Value] TEXT, 
+  CONSTRAINT [] PRIMARY KEY ([Key]));
+
