@@ -167,7 +167,7 @@ Partial Public Class GSMModule
     End Sub
 
     Private Sub AssertResponse(res As ResponseType, Optional timeout As Integer = Default_Timeout)
-        If GetResponse() <> res Then
+        If GetResponse(timeout) <> res Then
             Throw New Exception("Modem " + lastResponse.ToString())
         End If
     End Sub
@@ -276,6 +276,23 @@ Partial Public Class GSMModule
         isCalling = False
     End Sub
 
+    Public Function TryATH()
+        Try
+            ATHWaiting()
+            isCalling = False
+            Return True
+        Catch ex As Exception
+            Try
+                ATHAll()
+                isCalling = False
+                Return True
+            Catch ex1 As Exception
+
+            End Try
+        End Try
+        Return False
+    End Function
+
     Public Sub ATA()
         SendCommand("ATA")
         isCalling = True
@@ -291,6 +308,7 @@ Partial Public Class GSMModule
         If isCalling Then
             Globals.dbg("Warning: Is calling, refusing new call")
             Dim t As New Thread(Sub()
+                                    'Cannot ATHAll because it's calling.
                                     Try
                                         ATHWaiting()
                                     Catch ex As Exception
@@ -304,11 +322,7 @@ Partial Public Class GSMModule
             Else
                 Globals.dbg("Warning: RING not handled, refusing")
                 Dim t As New Thread(Sub()
-                                        Try
-                                            ATHWaiting()
-                                        Catch ex As Exception
-
-                                        End Try
+                                       TryATH()
                                     End Sub)
                 t.Start()
             End If

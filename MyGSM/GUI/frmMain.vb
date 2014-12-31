@@ -18,7 +18,9 @@ Public Class frmMain
         If Globals.SettingsStorage.BooleanSettings("AutoATH") Then
             If Globals.GSM.lastCall <> "" Then
                 ShowMsg("有来电来自: " + Globals.GSM.lastCall + ", 已自动挂断", ToolTipIcon.Info)
-                Globals.GSM.ATHWaiting()
+
+                    Globals.GSM.TryATH()
+
                 If sentInfo.FindIndex(Function(s As String)
                                           Return s = Globals.GSM.lastCall
                                       End Function) < 0 Then '还未发送过提示消息
@@ -28,15 +30,17 @@ Public Class frmMain
                 End If
             Else
                 ShowMsg("有未知号码来电, 已自动挂断", ToolTipIcon.Info)
-                Globals.GSM.ATHWaiting()
+
+                Globals.GSM.TryATH()
+
             End If
-        Else
-            If Globals.GSM.lastCall <> "" Then
-                ShowMsg("有来电来自: " + Globals.GSM.lastCall + ", 请注意处理", ToolTipIcon.Info)
             Else
-                ShowMsg("有未知号码来电, 请注意处理", ToolTipIcon.Info)
+                If Globals.GSM.lastCall <> "" Then
+                    ShowMsg("有来电来自: " + Globals.GSM.lastCall + ", 请注意处理", ToolTipIcon.Info)
+                Else
+                    ShowMsg("有未知号码来电, 请注意处理", ToolTipIcon.Info)
+                End If
             End If
-        End If
     End Sub
 
     Private Sub OnNewSMS()
