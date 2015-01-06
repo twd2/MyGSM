@@ -25,8 +25,18 @@
             sfd.Title = "另存为短消息"
             If sfd.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 Globals.Storage.ExportReceived(sms.UUID, sfd.FileName)
+                MsgBox("成功", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "另存为")
             End If
-            MsgBox("成功", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "另存为")
         End Using
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Try
+            frmSingleSend.TextBox1.Text = sms.RemoteAddress
+            frmSingleSend.Show()
+            frmSingleSend.TextBox2.Focus()
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

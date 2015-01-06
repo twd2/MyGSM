@@ -93,7 +93,7 @@ Partial Class frmSingleSend
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(307, 38)
         Me.Button1.TabIndex = 5
-        Me.Button1.Text = "发送"
+        Me.Button1.Text = "发送(&S)"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'frmSingleSend
