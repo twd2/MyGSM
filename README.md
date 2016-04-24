@@ -1,10 +1,11 @@
-MyGSM
-=====
+# MyGSM
 
 Yet another controller of GSM modules.
 
-WAVECOM tested.
+- WAVECOM tested.
+- SIM900A tested.
 
-SIM900A tested.
+## Building
 
-Please copy x64/x86(including SQLite DLLs) to Debug/Release.
+Build as usual.
+
