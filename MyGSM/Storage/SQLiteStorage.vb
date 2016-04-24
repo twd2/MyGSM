@@ -126,7 +126,7 @@ Public Class SQLiteStorage
             sms.UUID = rd.GetInt32(0)
             sms.Time = rd.GetDateTime(1)
             sms.RemoteAddress = rd.GetString(2)
-            sms.RemoteAddressType = Convert.ToInt32(rd.GetChar(3))
+            sms.RemoteAddressType = Convert.ToInt32(rd.GetString(3))
             sms.Message = rd.GetString(4)
             Return sms
         Else

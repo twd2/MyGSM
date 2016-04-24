@@ -14,12 +14,13 @@ Public Class frmMain
     End Sub
 
     Dim sentInfo As New List(Of String)
+
     Private Sub OnRing()
         If Globals.SettingsStorage.BooleanSettings("AutoATH") Then
             If Globals.GSM.lastCall <> "" Then
                 ShowMsg("有来电来自: " + Globals.GSM.lastCall + ", 已自动挂断", ToolTipIcon.Info)
 
-                    Globals.GSM.TryATH()
+                Globals.GSM.TryATH()
 
                 If sentInfo.FindIndex(Function(s As String)
                                           Return s = Globals.GSM.lastCall
@@ -34,19 +35,20 @@ Public Class frmMain
                 Globals.GSM.TryATH()
 
             End If
+        Else
+            If Globals.GSM.lastCall <> "" Then
+                ShowMsg("有来电来自: " + Globals.GSM.lastCall + ", 请注意处理", ToolTipIcon.Info)
             Else
-                If Globals.GSM.lastCall <> "" Then
-                    ShowMsg("有来电来自: " + Globals.GSM.lastCall + ", 请注意处理", ToolTipIcon.Info)
-                Else
-                    ShowMsg("有未知号码来电, 请注意处理", ToolTipIcon.Info)
-                End If
+                ShowMsg("有未知号码来电, 请注意处理", ToolTipIcon.Info)
             End If
+        End If
     End Sub
 
     Private Sub OnNewSMS()
         ShowMsg("有新消息, 正在接收", ToolTipIcon.Info)
         SendGetMsg()
     End Sub
+
     Private Sub OnModemClosed()
         MsgBox("GSM模块连接已断开", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "错误")
         Environment.Exit(1)
