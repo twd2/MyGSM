@@ -75,7 +75,7 @@ Partial Class frmBatchSend
         Me.txtSendTo.Name = "txtSendTo"
         Me.txtSendTo.Size = New System.Drawing.Size(276, 25)
         Me.txtSendTo.TabIndex = 3
-        Me.txtSendTo.Text = "/0/"
+        Me.txtSendTo.Text = "{0}"
         '
         'Label2
         '
@@ -109,7 +109,7 @@ Partial Class frmBatchSend
         Me.txtMsg.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtMsg.Size = New System.Drawing.Size(523, 244)
         Me.txtMsg.TabIndex = 6
-        Me.txtMsg.Text = "/1/, /2/!"
+        Me.txtMsg.Text = "{1}, {2}!"
         '
         'Button2
         '

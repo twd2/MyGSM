@@ -16,12 +16,8 @@ Public Class frmBatchSend
                 Continue For
             End If
             Dim Values = Globals.ParseString(Line)
-            Dim SendTo = txtSendTo.Text
-            Dim Msg = txtMsg.Text
-            For i = 0 To Values.Length - 1
-                SendTo = Replace(SendTo, "/" & i.ToString & "/", Values(i))
-                Msg = Replace(Msg, "/" & i.ToString & "/", Values(i))
-            Next
+            Dim SendTo = String.Format(txtSendTo.Text, Values)
+            Dim Msg = String.Format(txtMsg.Text, Values)
             Globals.Storage.EnqueueSend(SendTo, Msg)
         Next
         MsgBox("已加入发送队列", 64 + 0, "提示")

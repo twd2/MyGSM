@@ -27,7 +27,8 @@ Public Class Serial
         Win32Native.LastError()
         Dim MyDCB As New Win32Native.DCB
         Win32Native.GetCommState(_hFile, _LastDCB)
-        Win32Native.BuildCommDCB(String.Format("COM{0}:{1},n,8,1", _SerialName, _baudRate), MyDCB)
+        Win32Native.BuildCommDCBA(String.Format("baud={0} parity=N data=8 stop=1", _baudRate), MyDCB)
+        Win32Native.LastError()
         'MyDCB.DCBlength = System.Runtime.InteropServices.Marshal.SizeOf(MyDCB)
         Win32Native.SetCommState(_hFile, MyDCB)
         Win32Native.LastError()

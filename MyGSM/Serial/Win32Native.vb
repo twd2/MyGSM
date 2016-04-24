@@ -65,7 +65,7 @@ Public Class Win32Native
     End Function
 
     <DllImport("kernel32")>
-    Public Shared Function BuildCommDCB(ByVal lpDef As String, ByRef lpDCB As DCB) As Long
+    Public Shared Function BuildCommDCBA(ByVal lpDef As String, ByRef lpDCB As DCB) As Long
 
     End Function
     Public Structure DCB

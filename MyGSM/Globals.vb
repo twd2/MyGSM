@@ -59,10 +59,13 @@ Public Class Globals
         If (stype = Storage.StorageType.None) OrElse (stype = Storage.StorageType.SQLite AndAlso spath.ToLower() = DatabasePath.ToLower()) Then
             '不需要更换Storage
             Storage = SettingsStorage
+            dbg("Storage: Default")
         ElseIf stype = Storage.StorageType.SQLite Then
             Storage = New SQLiteStorage(spath)
+            dbg("Storage: SQLite")
         ElseIf stype = Storage.StorageType.FileSystem Then
             Storage = New FileSystemStorage(spath)
+            dbg("Storage: FileSystem")
         Else
             Throw New Exception("Unknown storage type")
         End If
